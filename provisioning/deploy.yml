@@ -1,0 +1,40 @@
+---
+- name: "Boot all hosts"
+  gather_facts: true
+  hosts:  all
+  become: yes
+  vars:
+    add_host_entries: true
+    add_resolv_entries: true
+  pre_tasks:
+  - name: "Setting hostname"
+    shell: "hostnamectl set-hostname {{ inventory_hostname }}"
+  roles:
+    - common
+
+# - name: "Deploy docker-compose"
+#   gather_facts: true
+#   hosts:  vg-controller-83
+#   become: yes
+#   roles:
+#     - docker-compose
+
+- name: "Deploy ansible role"
+  gather_facts: true
+  hosts:  vg-controller-87
+  become: yes
+  roles:
+    # - { role: 'cluster-lvm' }
+    # - lvm # TESTING
+    # - cluster-lvm # TESTING
+    - sonarqube # TESTING
+    - nexus # TESTING
+    # - docker # TESTED_OK
+    # - docker-compose # TESTED_OK install docker
+#
+# - name: "Deploy docker-compose"
+#   gather_facts: true
+#   hosts:  vg-controller-85
+#   become: yes
+#   roles:
+#     - docker-compose

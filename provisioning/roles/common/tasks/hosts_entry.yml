@@ -1,0 +1,18 @@
+---
+- name: Add mappings to /etc/hosts
+  blockinfile:
+    path: /etc/hosts
+    block: |
+      {{ item.ip }} {{ item.namelong }} {{ item.nameshort }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.nameshort }}"
+  with_items:
+  - { ip: 192.168.18.82, namelong: vg-controller-82.local, nameshort: vg-controller-82 }
+  - { ip: 192.168.18.83, namelong: vg-controller-83.local, nameshort: vg-controller-83 }
+  - { ip: 192.168.18.84, namelong: vg-controller-84.local, nameshort: vg-controller-84 }
+  - { ip: 192.168.18.85, namelong: vg-controller-85.local, nameshort: vg-controller-85 }
+  - { ip: 192.168.18.86, namelong: vg-controller-86.local, nameshort: vg-controller-86 }
+  - { ip: 192.168.18.87, namelong: vg-controller-87.local, nameshort: vg-controller-87 }
+  - { ip: 192.168.18.88, namelong: master.local, nameshort: master }  
+  - { ip: 192.168.18.89, namelong: client1.local, nameshort: client1 }  
+  - { ip: 192.168.18.90, namelong: client2.local, nameshort: client2 }      
+  # when: add_host_entries
