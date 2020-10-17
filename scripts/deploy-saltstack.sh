@@ -42,11 +42,10 @@ echo "==========================================================================
 # vagrant up --provider=libvirt "vg-controller-87"
 
 # Saltstack provisioning
-# https://app.vagrantup.com/centos/boxes/8
-vagrant box add "centos/8" --provider=libvirt
-vagrant up --provider=libvirt "master"
-vagrant up --provider=libvirt "client1"
-vagrant up --provider=libvirt "client2"
+# https://app.vagrantup.com/debian/boxes/jessie64
+vagrant box add "debian/jessie64" --provider=libvirt
+vagrant init --template Vagrantfile.provision.consul.erb
+vagrant up --provider=libvirt
 
 vagrant box list #veridy installed boxes
 vagrant status #Check the status of the VMs to see that none of them have been created yet
