@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |vbox, override|
     # Enable multiple guest CPUs if available
-    override.vm.box = "debian/jessie64"
+    override.vm.box = "bento/debian-10.4"
     vbox.memory = 1024
     vbox.cpus = 2
     vbox.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "libvirt" do |lv, override|
     # Enable multiple guest CPUs if available
-    override.vm.box = "debian/jessie64"
+    override.vm.box = "bento/debian-10.4"
     lv.memory = 1024
     lv.cpus = 2
     #lv.customize ["modifyvm", :id, "--ioapic", "on"]

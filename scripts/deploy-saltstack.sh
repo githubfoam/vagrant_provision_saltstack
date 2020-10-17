@@ -43,7 +43,8 @@ echo "==========================================================================
 
 # Saltstack provisioning
 # https://app.vagrantup.com/debian/boxes/jessie64
-vagrant box add "debian/jessie64" --provider=libvirt
+vagrant box add "bento/debian-10.4" --provider=virtualbox
+vagrant mutate "bento/debian-10.4" libvirt
 vagrant init --template Vagrantfile.provision.consul.erb
 vagrant up --provider=libvirt
 
