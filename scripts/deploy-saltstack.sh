@@ -42,10 +42,10 @@ echo "==========================================================================
 # vagrant up --provider=libvirt "vg-controller-87"
 
 # Saltstack provisioning
-# https://app.vagrantup.com/debian/boxes/jessie64
-vagrant box add "bento/debian-10.4" --provider=virtualbox
-vagrant mutate "bento/debian-10.4" libvirt
-vagrant init --template Vagrantfile.provision.consul.erb
+# https://app.vagrantup.com/ubuntu/boxes/bionic64
+vagrant box add "ubuntu/bionic64" --provider=virtualbox
+vagrant mutate "ubuntu/bionic64" libvirt
+vagrant init --template Vagrantfile.provision.salt.erb
 vagrant up --provider=libvirt
 
 vagrant box list #veridy installed boxes
