@@ -45,7 +45,7 @@ echo "==========================================================================
 # https://app.vagrantup.com/debian/boxes/jessie64
 vagrant box add "bento/debian-10.4" --provider=virtualbox
 vagrant mutate "bento/debian-10.4" libvirt
-vagrant init --template Vagrantfile.provision.consul.erb
+vagrant init --template Vagrantfile.provision.vault.erb
 vagrant up --provider=libvirt
 
 vagrant box list #veridy installed boxes
