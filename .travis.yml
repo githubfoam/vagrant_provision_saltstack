@@ -8,7 +8,7 @@ matrix:
   fast_finish: true
   include:
 
-    - name: "deploy consul saltstack provisioning - bionic"
+    - name: "deploy vault saltstack provisioning - bionic"
       dist: bionic
       language: python
       python: 3.7
