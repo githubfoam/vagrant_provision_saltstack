@@ -43,9 +43,9 @@ echo "==========================================================================
 
 # Saltstack provisioning
 # https://app.vagrantup.com/debian/boxes/jessie64
-vagrant box add "bento/debian-10.4" --provider=virtualbox
-vagrant mutate "bento/debian-10.4" libvirt
-vagrant init --template Vagrantfile.provision.consul.erb
+vagrant box add "freebsd/FreeBSD-11.0-RELEASE-p1" --provider=virtualbox
+vagrant mutate "freebsd/FreeBSD-11.0-RELEASE-p1" libvirt
+vagrant init --template Vagrantfile.provision.freebsd.erb
 vagrant up --provider=libvirt
 
 vagrant box list #veridy installed boxes
