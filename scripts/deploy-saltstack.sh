@@ -42,9 +42,9 @@ echo "==========================================================================
 # vagrant up --provider=libvirt "vg-controller-87"
 
 # Saltstack provisioning
-# https://app.vagrantup.com/debian/boxes/jessie64
-vagrant box add "freebsd/FreeBSD-11.0-RELEASE-p1" --provider=virtualbox
-vagrant mutate "freebsd/FreeBSD-11.0-RELEASE-p1" libvirt
+# https://app.vagrantup.com/freebsd
+vagrant box add "freebsd/FreeBSD-11.4-STABLE" --provider=virtualbox
+vagrant mutate "freebsd/FreeBSD-11.4-STABLE" libvirt
 vagrant init --template Vagrantfile.provision.freebsd.erb
 vagrant up --provider=libvirt
 
