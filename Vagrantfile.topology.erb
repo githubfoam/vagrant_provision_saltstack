@@ -7,7 +7,7 @@ echo "192.168.45.1 salt-master.example.com salt-master" |sudo tee -a /etc/hosts
 echo "192.168.45.2 hugo-webserver.example.com hugo-webserver" |sudo tee -a /etc/hosts
 cat /etc/hosts
 
-echo "name: nameserver, ip: 8.8.8.8 " |sudo tee -a /etc/resolv.conf
+echo "nameserver 8.8.8.8 " |sudo tee -a /etc/resolv.conf
 cat /etc/resolv.conf
 SCRIPT
 
