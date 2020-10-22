@@ -1,0 +1,66 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$docker_script = <<SCRIPT
+
+echo "192.168.45.1 salt-master.example.com salt-master" |sudo tee -a /etc/hosts
+echo "192.168.45.2 hugo-webserver.example.com hugo-webserver" |sudo tee -a /etc/hosts
+cat /etc/hosts
+
+echo "name: nameserver, ip: 8.8.8.8 " |sudo tee -a /etc/resolv.conf
+cat /etc/resolv.conf
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = false
+    vb.memory = "512"
+    vb.cpus = 1
+  end
+
+  config.vm.define "salt-master" do |webtier|
+      webtier.vm.box = "bento/debian-10.4"
+      webtier.vm.hostname = "salt-master"
+      webtier.vm.network "private_network", ip: "192.168.45.41"
+      webtier.vm.provider "virtualbox" do |vb|
+          vb.name = "vbox-salt-master"
+      end
+
+      webtier.vm.provision "shell", inline: $docker_script, privileged: false
+      webtier.vm.provision :shell, path: "provisioning/bootstrap-salt-master.sh"
+      webtier.vm.provision "shell", inline: <<-SHELL
+      hostnamectl set-hostname salt-master
+      SHELL
+    end
+
+  config.vm.define "hugo-webserver" do |webtier|
+      webtier.vm.box = "bento/debian-10.4"
+      webtier.vm.hostname = "hugo-webserver"
+      webtier.vm.network "private_network", ip: "192.168.45.42"
+      webtier.vm.provider "virtualbox" do |vb|
+          vb.name = "vbox-hugo-webserver"
+      end
+
+      webtier.vm.provision "shell", inline: $docker_script, privileged: false
+      webtier.vm.provision :shell, path: "provisioning/bootstrap-salt-minion.sh"
+      webtier.vm.provision "shell", inline: <<-SHELL
+      hostnamectl set-hostname hugo-webserver
+      SHELL
+    end
+
+  config.vm.define "puppet-agent-centos" do |webtier|
+      webtier.vm.box = "bento/debian-10.4"
+      webtier.vm.hostname = "control01"
+      webtier.vm.network "private_network", ip: "192.168.45.43"
+      webtier.vm.provider "virtualbox" do |vb|
+          vb.name = "vbox-puppet-agent-centos"
+      end
+
+      #webtier.vm.provision "shell", inline: $docker_script, privileged: false
+      webtier.vm.provision "shell", inline: <<-SHELL
+      hostnamectl set-hostname puppet-agent-centos
+      SHELL
+    end
+
+
+end
