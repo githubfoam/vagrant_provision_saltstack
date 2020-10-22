@@ -7,7 +7,7 @@ echo "192.168.45.1 salt-master.example.com salt-master" |sudo tee -a /etc/hosts
 echo "192.168.45.2 hugo-webserver.example.com hugo-webserver" |sudo tee -a /etc/hosts
 cat /etc/hosts
 
-echo "nameserver 8.8.8.8 " |sudo tee -a /etc/resolv.conf
+echo "name: nameserver, ip: 8.8.8.8 " |sudo tee -a /etc/resolv.conf
 cat /etc/resolv.conf
 SCRIPT
 
@@ -45,6 +45,20 @@ Vagrant.configure("2") do |config|
       webtier.vm.provision :shell, path: "provisioning/bootstrap-salt-minion.sh"
       webtier.vm.provision "shell", inline: <<-SHELL
       hostnamectl set-hostname hugo-webserver
+      SHELL
+    end
+
+  config.vm.define "puppet-agent-centos" do |webtier|
+      webtier.vm.box = "bento/debian-10.4"
+      webtier.vm.hostname = "control01"
+      webtier.vm.network "private_network", ip: "192.168.45.43"
+      webtier.vm.provider "virtualbox" do |vb|
+          vb.name = "vbox-puppet-agent-centos"
+      end
+
+      #webtier.vm.provision "shell", inline: $docker_script, privileged: false
+      webtier.vm.provision "shell", inline: <<-SHELL
+      hostnamectl set-hostname puppet-agent-centos
       SHELL
     end
 

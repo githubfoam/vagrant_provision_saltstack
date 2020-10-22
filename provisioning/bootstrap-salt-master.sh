@@ -19,7 +19,7 @@ echo "======================Deploy salt master==================================
 
 # The -M option tells the script to install the Salt master software, 
 # and the -N option tells the script to not install the minion software
-# wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
-# sh bootstrap-salt.sh -M -N
+wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
+sh bootstrap-salt.sh -M -N
 
 echo "======================Deploy salt master=============================================================="
